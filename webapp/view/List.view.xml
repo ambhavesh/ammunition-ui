@@ -1,7 +1,7 @@
 <mvc:View
-    xmlns:core="sap.ui.core"
     controllerName="zammunition.controller.List"
     xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
     xmlns="sap.m"
     xmlns:f="sap.f"
     xmlns:svm="sap.ui.comp.smartvariants"
