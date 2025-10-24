@@ -1,0 +1,228 @@
+<mvc:View
+    xmlns:core="sap.ui.core"
+    controllerName="zammunition.controller.List"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:svm="sap.ui.comp.smartvariants"
+    xmlns:st="sap.ui.comp.smarttable"
+    xmlns:sfb="sap.ui.comp.smartfilterbar"
+>
+    <f:DynamicPage id="page">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <svm:SmartVariantManagement
+                        id="smartVariant"
+                        persistencyKey="zammunition.svm.pkey"
+                    />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader>
+                <sfb:SmartFilterBar
+                    id="smartFilterBar"
+                    entitySet="Weapons"
+                    smartVariant="smartVariant"
+                    persistencyKey="zammunition.filter.pkey"
+                    showFilterConfiguration="false"
+                >
+                    <sfb:customData>
+                        <core:CustomData
+                            key="defaultFilterBarExpanded"
+                            value='{"VH_many_filters": "true"}'
+                        />
+                        <core:CustomData
+                            key="defaultShowAllFilters"
+                            value='{"VH_many_filters": "true"}'
+                        />
+                    </sfb:customData>
+                    <sfb:controlConfiguration>
+                        <sfb:ControlConfiguration
+                            key="Name"
+                            visibleInAdvancedArea="true"
+                        />
+                    </sfb:controlConfiguration>
+                </sfb:SmartFilterBar>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <st:SmartTable
+                id="smartTable"
+                entitySet="Weapons"
+                header="Weapons"
+                smartFilterId="smartFilterBar"
+                tableType="ResponsiveTable"
+                beforeRebindTable="onBeforeRebindTable"
+                smartVariant="smartVariant"
+                persistencyKey="zammunition.table.pkey"
+                enableCopy="false"
+                beforeExport="onBeforeExportPress"
+                enableExport="true"
+                enableAutoColumnWidth="true"
+                enableAutoBinding="true"
+            >
+                <st:customData>
+                    <core:CustomData
+                        key="defaultFilterBarExpanded"
+                        value='true'
+                    />
+                    <core:CustomData
+                        key="defaultShowAllFilters"
+                        value='true'
+                    />
+                </st:customData>
+                <Table
+                    id="weaponsTable"
+                    mode="MultiSelect"
+                    selectionChange="onSelectionChange"
+                >
+                    <columns>
+                        <Column>
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='{"columnKey": "Name", "leadingProperty": "Name"}'
+                                />
+                            </customData>
+                            <header>
+                                <Label text="Name" />
+                            </header>
+                        </Column>
+                        <Column>
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='{"columnKey": "Manufacturer", "leadingProperty": "Manufacturer"}'
+                                />
+                            </customData>
+                            <header>
+                                <Label text="Manufacturer" />
+                            </header>
+                        </Column>
+                        <Column>
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='{"columnKey": "Model", "leadingProperty": "Model"}'
+                                />
+                            </customData>
+                            <header>
+                                <Label text="Model" />
+                            </header>
+                        </Column>
+                        <Column>
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='{"columnKey": "Type", "leadingProperty": "Type"}'
+                                />
+                            </customData>
+                            <header>
+                                <Label text="Type" />
+                            </header>
+                        </Column>
+                        <Column>
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='{"columnKey": "Caliber", "leadingProperty": "Caliber"}'
+                                />
+                            </customData>
+                            <header>
+                                <Label text="Caliber" />
+                            </header>
+                        </Column>
+                        <Column>
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='{"columnKey": "Range", "leadingProperty": "Range"}'
+                                />
+                            </customData>
+                            <header>
+                                <Label text="Range (meters)" />
+                            </header>
+                        </Column>
+                        <Column visible="false">
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='{"columnKey": "Accuracy", "leadingProperty": "Accuracy"}'
+                                />
+                            </customData>
+                            <header>
+                                <Label text="Accuracy" />
+                            </header>
+                        </Column>
+                        <Column visible="false">
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='{"columnKey": "BaseDamage", "leadingProperty": "BaseDamage"}'
+                                />
+                            </customData>
+                            <header>
+                                <Label text="Base Damage" />
+                            </header>
+                        </Column>
+                        <Column visible="false">
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='{"columnKey": "APDamage", "leadingProperty": "APDamage"}'
+                                />
+                            </customData>
+                            <header>
+                                <Label text="AP Damage" />
+                            </header>
+                        </Column>
+                        <Column visible="false">
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='{"columnKey": "Cost", "leadingProperty": "Cost"}'
+                                />
+                            </customData>
+                            <header>
+                                <Label text="Cost (INR)" />
+                            </header>
+                        </Column>
+                        <Column visible="false">
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='{"columnKey": "Weight", "leadingProperty": "Weight"}'
+                                />
+                            </customData>
+                            <header>
+                                <Label text="Weight (kg)" />
+                            </header>
+                        </Column>
+                    </columns>
+                    <ColumnListItem>
+                        <Text text="{Name}" />
+                        <Text text="{Manufacturer}" />
+                        <Text text="{Model}" />
+                        <Text text="{Type}" />
+                        <Text text="{Caliber}" />
+                         <ObjectStatus
+                        text="{Range}"
+                        inverted="true"
+                        state="{path: 'Range', formatter: '.formatter.formatRange' }"
+                        icon="{path: 'Range', formatter: '.formatter.formatRangeIcon'}"
+                    />
+
+                        <Text text="{Accuracy}" />
+                        <Text text="{BaseDamage}" />
+                        <Text text="{APDamage}" />
+                        <Text text="{Cost}" />
+                        <Text text="{Weight}" />
+                        <Text text="{Cost}" />
+                    </ColumnListItem>
+                </Table>
+            </st:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
