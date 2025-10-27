@@ -41,7 +41,8 @@
       "desktop": true,
       "tablet": true,
       "phone": true
-    }
+    },
+    "fullWidth": true
   },
   "sap.ui5": {
     "flexEnabled": false,
@@ -66,7 +67,13 @@
       "": {
         "dataSource": "mainService",
         "preload": true,
-        "settings": {}
+        "settings": {
+          "defaultBindingMode":"TwoWay",
+          "useBatch": false
+        }
+      },
+      "ui": {
+        "type": "sap.ui.model.json.JSONModel"
       }
     },
     "resources": {

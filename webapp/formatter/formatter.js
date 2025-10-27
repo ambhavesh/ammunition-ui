@@ -22,7 +22,7 @@ sap.ui.define([
             } else if (iRange > 500 && iRange < 1000) {
                 return "sap-icon://co"
             } else {
-                return "sap-icon://high-priority";
+                return "sap-icon://alert";
             }
         }
 

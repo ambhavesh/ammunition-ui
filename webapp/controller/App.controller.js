@@ -4,7 +4,11 @@ sap.ui.define([
   "use strict";
 
   return BaseController.extend("zammunition.controller.App", {
-      onInit() {
-      }
+    onInit() {
+    },
+
+    getModel: function (sName) {
+      return !sName ? this.getOwnerComponent().getModel() : this.getOwnerComponent().getModel(sName)
+    }
   });
 });

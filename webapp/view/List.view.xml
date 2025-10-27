@@ -27,6 +27,7 @@
                     smartVariant="smartVariant"
                     persistencyKey="zammunition.filter.pkey"
                     showFilterConfiguration="false"
+                    showClearOnFB="true"
                 >
                     <sfb:customData>
                         <core:CustomData
@@ -41,6 +42,11 @@
                     <sfb:controlConfiguration>
                         <sfb:ControlConfiguration
                             key="Name"
+                            visibleInAdvancedArea="true"
+                            displayBehaviour="idAndDescription"
+                        />
+                        <sfb:ControlConfiguration
+                            key="Accuracy"
                             visibleInAdvancedArea="true"
                         />
                     </sfb:controlConfiguration>
@@ -62,28 +68,40 @@
                 enableExport="true"
                 enableAutoColumnWidth="true"
                 enableAutoBinding="true"
+                requestAtLeastFields="Id,Name,Model,Manufacturer,Type,Range,APDamage,Accuracy,BaseDamage,Caliber,Cost,Weight"
             >
+                <st:customToolbar>
+                    <OverflowToolbar>
+                        <ToolbarSpacer />
+                        <Button
+                            text="Update Weight"
+                            enabled="{ui>/editEnabled}"
+                            press="onUpdateWeightPress"
+                        />
+                    </OverflowToolbar>
+                </st:customToolbar>
                 <st:customData>
                     <core:CustomData
                         key="defaultFilterBarExpanded"
-                        value='true'
+                        value="true"
                     />
                     <core:CustomData
                         key="defaultShowAllFilters"
-                        value='true'
+                        value="true"
                     />
                 </st:customData>
                 <Table
                     id="weaponsTable"
                     mode="MultiSelect"
                     selectionChange="onSelectionChange"
+                    sticky="ColumnHeaders"
                 >
                     <columns>
                         <Column>
                             <customData>
                                 <core:CustomData
                                     key="p13nData"
-                                    value='{"columnKey": "Name", "leadingProperty": "Name"}'
+                                    value='{"columnKey": "Name", "leadingProperty": "Name", sortProperty: "Name", filterProperty: "Name"}'
                                 />
                             </customData>
                             <header>
@@ -94,7 +112,7 @@
                             <customData>
                                 <core:CustomData
                                     key="p13nData"
-                                    value='{"columnKey": "Manufacturer", "leadingProperty": "Manufacturer"}'
+                                    value='{"columnKey": "Manufacturer", "leadingProperty": "Manufacturer", sortProperty: "Manufacturer", filterProperty: "Manufacturer"}'
                                 />
                             </customData>
                             <header>
@@ -145,6 +163,17 @@
                                 <Label text="Range (meters)" />
                             </header>
                         </Column>
+                        <Column visible="true">
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='{"columnKey": "Cost", "leadingProperty": "Cost"}'
+                                />
+                            </customData>
+                            <header>
+                                <Label text="Cost (INR)" />
+                            </header>
+                        </Column>
                         <Column visible="false">
                             <customData>
                                 <core:CustomData
@@ -182,17 +211,6 @@
                             <customData>
                                 <core:CustomData
                                     key="p13nData"
-                                    value='{"columnKey": "Cost", "leadingProperty": "Cost"}'
-                                />
-                            </customData>
-                            <header>
-                                <Label text="Cost (INR)" />
-                            </header>
-                        </Column>
-                        <Column visible="false">
-                            <customData>
-                                <core:CustomData
-                                    key="p13nData"
                                     value='{"columnKey": "Weight", "leadingProperty": "Weight"}'
                                 />
                             </customData>
@@ -207,19 +225,21 @@
                         <Text text="{Model}" />
                         <Text text="{Type}" />
                         <Text text="{Caliber}" />
-                         <ObjectStatus
-                        text="{Range}"
-                        inverted="true"
-                        state="{path: 'Range', formatter: '.formatter.formatRange' }"
-                        icon="{path: 'Range', formatter: '.formatter.formatRangeIcon'}"
-                    />
+                        <ObjectStatus
+                            text="{Range}"
+                            inverted="true"
+                            state="{path: 'Range', formatter: '.formatter.formatRange' }"
+                            icon="{path: 'Range', formatter: '.formatter.formatRangeIcon'}"
+                        />
 
+                        <Input
+                            value="{Cost}"
+                            enabled="false"
+                        />
                         <Text text="{Accuracy}" />
                         <Text text="{BaseDamage}" />
                         <Text text="{APDamage}" />
-                        <Text text="{Cost}" />
                         <Text text="{Weight}" />
-                        <Text text="{Cost}" />
                     </ColumnListItem>
                 </Table>
             </st:SmartTable>
